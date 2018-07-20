@@ -1,5 +1,6 @@
 /////括号匹配
 #include<iostream>
+#include<string>
 #include<stack>
 
 using namespace std;
@@ -26,35 +27,35 @@ bool ismatch(char right, char left){
 }
 
 //判断字符串括号是否匹配
-bool istrue(char* s){
+bool istrue(string s){
     stack <char> cs;
-    while(*s){
+    int len = s.size();
+    for (int i=0;i<len;i++){
         char c;
-        c = *s;
+        c = s[i];
         if (isleft(c)){
            cs.push(c);
         }
         else{
-            if (cs.empty()||!ismatch(c,cs.top())){
+            if (cs.empty() || !ismatch(c,cs.top())){
                 return false;
             }
             cs.pop();
         }
-        s++;
     }
     if (!cs.empty()){
         return false;
-    }else {
-        return true;
     }
+    return true;
 }
 int main(){
-    char* s;
-    cin>>s;
-    if (istrue(s)){
-        cout<<"Yes"<<endl;
-    }else {
-        cout<<"No"<<endl;
+    string s;
+    while(cin>>s){
+        if (istrue(s)){
+            cout<<"Yes"<<endl;
+        }else {
+            cout<<"No"<<endl;
+        }
     }
     return 0;
 }
